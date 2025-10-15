@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Dashboard</title>
+    <!-- Lucide Icons para iconografía moderna -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
+    <style>
+        /* ===== RESET Y CONFIGURACIÓN BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #2d1b3d 0%, #1a0f26 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ===== CONTENEDOR PRINCIPAL ===== */
+        .profile-container {
+            width: 100%;
+            max-width: 375px;
+            height: 100vh;
+            max-height: 667px;
+            background: linear-gradient(135deg, #3d1f54 0%, #1f0d2e 100%);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+        }
+
+        /* ===== DECORACIONES DE FONDO ===== */
+        .background-circles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.4;
+        }
+
+        .circle-pink-large {
+            width: 180px;
+            height: 180px;
+            background: #ff1493;
+            top: -60px;
+            left: -60px;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .circle-purple-large {
+            width: 250px;
+            height: 250px;
+            background: #6a4c7a;
+            top: -50px;
+            right: -80px;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.5;
+            }
+        }
+
+        /* ===== ICONO DE CONFIGURACIÓN ===== */
+        .settings-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background: #ff1493;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
+        }
+
+        .settings-icon:hover {
+            transform: rotate(90deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.6);
+        }
+
+        .settings-icon i {
+            color: white;
+            width: 22px;
+            height: 22px;
+        }
+
+        /* ===== SECCIÓN DE PERFIL ===== */
+        .profile-section {
+            position: relative;
+            z-index: 5;
+            padding: 80px 20px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
+            position: relative;
+            animation: fadeInScale 0.8s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .profile-avatar i {
+            width: 60px;
+            height: 60px;
+            color: #1a0f26;
+        }
+
+        .profile-name {
+            color: #ff1493;
+            font-size
