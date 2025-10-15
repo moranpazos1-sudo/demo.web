@@ -3,154 +3,771 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Dashboard</title>
-    <!-- Lucide Icons para iconografía moderna -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
+    <title>Clavijo Corporation - Tienda Tecnológica</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== RESET Y CONFIGURACIÓN BASE ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --pastel-lavender: #E8D5F2;
+            --pastel-mint: #D4F1F4;
+            --pastel-peach: #F5D7C8;
+            --pastel-yellow: #FFF4D6;
+            --pastel-pink: #F8D7E8;
+            --dark-text: #2D2D2D;
+            --light-text: #FFFFFF;
+            --accent-purple: #B8A8D8;
+            --accent-blue: #7EC8C8;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-            background: linear-gradient(180deg, #2d1b3d 0%, #1a0f26 100%);
+            color: var(--dark-text);
+            background: linear-gradient(135deg, #F5F5F5 0%, #FFF9F0 100%);
+            line-height: 1.6;
+        }
+
+        /* HEADER Y NAVEGACIÓN */
+        header {
+            background: linear-gradient(135deg, var(--pastel-lavender) 0%, var(--pastel-mint) 100%);
+            padding: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-text);
             display: flex;
             align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow-x: hidden;
+            gap: 0.5rem;
         }
 
-        /* ===== CONTENEDOR PRINCIPAL ===== */
-        .profile-container {
-            width: 100%;
-            max-width: 375px;
-            height: 100vh;
-            max-height: 667px;
-            background: linear-gradient(135deg, #3d1f54 0%, #1f0d2e 100%);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            border-radius: 20px;
+        .logo i {
+            color: var(--accent-purple);
         }
 
-        /* ===== DECORACIONES DE FONDO ===== */
-        .background-circles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .circle {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.4;
-        }
-
-        .circle-pink-large {
-            width: 180px;
-            height: 180px;
-            background: #ff1493;
-            top: -60px;
-            left: -60px;
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        .circle-purple-large {
-            width: 250px;
-            height: 250px;
-            background: #6a4c7a;
-            top: -50px;
-            right: -80px;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 0.4;
-            }
-            50% {
-                transform: scale(1.05);
-                opacity: 0.5;
-            }
-        }
-
-        /* ===== ICONO DE CONFIGURACIÓN ===== */
-        .settings-icon {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            width: 40px;
-            height: 40px;
-            background: #ff1493;
-            border-radius: 50%;
+        nav ul {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
-        }
-
-        .settings-icon:hover {
-            transform: rotate(90deg) scale(1.1);
-            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.6);
-        }
-
-        .settings-icon i {
-            color: white;
-            width: 22px;
-            height: 22px;
-        }
-
-        /* ===== SECCIÓN DE PERFIL ===== */
-        .profile-section {
             position: relative;
-            z-index: 5;
-            padding: 80px 20px 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
-        .profile-avatar {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
-            border-radius: 50%;
+        nav a:hover {
+            color: var(--accent-purple);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-blue);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .cart-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--dark-text);
+        }
+
+        .cart-icon:hover {
+            color: var(--accent-purple);
+            transform: scale(1.2);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, var(--pastel-yellow) 0%, var(--pastel-peach) 50%, var(--pastel-pink) 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            min-height: 500px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
-            position: relative;
-            animation: fadeInScale 0.8s ease-out;
+            animation: fadeIn 1s ease-in;
         }
 
-        @keyframes fadeInScale {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: scale(0.8);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
-                transform: scale(1);
+                transform: translateY(0);
             }
         }
 
-        .profile-avatar i {
-            width: 60px;
-            height: 60px;
-            color: #1a0f26;
+        .hero-content {
+            max-width: 700px;
         }
 
-        .profile-name {
-            color: #ff1493;
-            font-size
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--dark-text);
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--dark-text);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-blue) 100%);
+            color: var(--light-text);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* SECCIÓN DE CATEGORÍAS */
+        .categories {
+            max-width: 1200px;
+            margin: -3rem auto 3rem;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 100;
+        }
+
+        .category-card {
+            background: linear-gradient(135deg, var(--pastel-lavender) 0%, var(--pastel-mint) 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover .category-icon {
+            transform: scale(1.2) rotate(10deg);
+            color: var(--accent-purple);
+        }
+
+        .category-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* SECCIÓN DE PRODUCTOS */
+        .products-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark-text);
+            font-weight: 800;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--light-text);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            background: linear-gradient(135deg, var(--pastel-lavender) 0%, var(--pastel-mint) 100%);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-card:hover .product-image i {
+            transform: scale(1.3) rotate(15deg);
+        }
+
+        .product-image i {
+            transition: all 0.3s ease;
+            color: var(--accent-purple);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--dark-text);
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart-btn {
+            background: linear-gradient(135deg, var(--pastel-peach) 0%, var(--pastel-pink) 100%);
+            color: var(--dark-text);
+            border: 2px solid var(--accent-purple);
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-blue) 100%);
+            color: var(--light-text);
+            transform: scale(1.05);
+        }
+
+        /* SECCIÓN DE CARACTERÍSTICAS */
+        .features {
+            background: linear-gradient(135deg, var(--pastel-mint) 0%, var(--pastel-lavender) 100%);
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature {
+            text-align: center;
+            animation: slideInUp 0.6s ease forwards;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent-purple);
+            margin-bottom: 1rem;
+        }
+
+        .feature h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, var(--dark-text) 0%, #414141 100%);
+            color: var(--light-text);
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--pastel-yellow);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--pastel-yellow);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-blue);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.8;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .navbar {
+                padding: 0 1rem;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 0.5rem 0;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 2rem 1rem;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .categories {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER Y NAVEGACIÓN -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <i class="fas fa-microchip"></i>
+                Clavijo Corporation
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#categorias">Categorías</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECCIÓN HERO -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>🚀 Tecnología del Futuro Hoy</h1>
+            <p>Descubre los mejores productos tecnológicos con precios increíbles. Calidad garantizada en cada compra.</p>
+            <button class="cta-button" onclick="alert('¡Explora nuestros productos!')">Explorar Tienda</button>
+            <button class="cta-button" onclick="alert('Contacta con nosotros')">Contáctanos</button>
+        </div>
+    </section>
+
+    <!-- CATEGORÍAS -->
+    <section class="categories" id="categorias">
+        <div class="category-card">
+            <div class="category-icon"><i class="fas fa-laptop"></i></div>
+            <h3>Laptops</h3>
+            <p>Equipos potentes para trabajo</p>
+        </div>
+        <div class="category-card">
+            <div class="category-icon"><i class="fas fa-mobile-alt"></i></div>
+            <h3>Smartphones</h3>
+            <p>La tecnología en tu bolsillo</p>
+        </div>
+        <div class="category-card">
+            <div class="category-icon"><i class="fas fa-headphones"></i></div>
+            <h3>Accesorios</h3>
+            <p>Complementa tu experiencia tech</p>
+        </div>
+        <div class="category-card">
+            <div class="category-icon"><i class="fas fa-gamepad"></i></div>
+            <h3>Gaming</h3>
+            <p>Sumérgete en la experiencia gaming</p>
+        </div>
+    </section>
+
+    <!-- PRODUCTOS -->
+    <section class="products-section" id="productos">
+        <h2 class="section-title">Productos Destacados</h2>
+        <div class="products-grid">
+            <!-- Producto 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Laptop Pro 15"</h3>
+                    <p class="product-description">Procesador último modelo, 16GB RAM, 512GB SSD</p>
+                    <div class="product-price">$1,299</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Laptop Pro 15')">Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Smartphone Ultra</h3>
+                    <p class="product-description">Pantalla AMOLED, cámara 108MP, 5G</p>
+                    <div class="product-price">$899</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Smartphone Ultra')">Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Producto 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-headphones"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Auriculares Inalámbricos</h3>
+                    <p class="product-description">Cancelación de ruido, 48h de batería</p>
+                    <div class="product-price">$299</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Auriculares Inalámbricos')">Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Producto 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-tablet-alt"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Tablet 12.9"</h3>
+                    <p class="product-description">Pantalla 4K, lápiz digital incluido</p>
+                    <div class="product-price">$699</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Tablet 12.9')">Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Producto 5 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Cámara Digital 4K</h3>
+                    <p class="product-description">Grabación 4K 60fps, estabilización</p>
+                    <div class="product-price">$1,199</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Cámara Digital 4K')">Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Producto 6 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Consola Gaming</h3>
+                    <p class="product-description">Última generación, 2TB almacenamiento</p>
+                    <div class="product-price">$499</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Consola Gaming')">Agregar al Carrito</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARACTERÍSTICAS -->
+    <section class="features">
+        <div class="features-container">
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
+                <h3>Envío Rápido</h3>
+                <p>Entrega en 24-48 horas a cualquier lugar</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                <h3>Compra Segura</h3>
+                <p>Encriptación y protección de datos garantizada</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-undo"></i></div>
+                <h3>Devoluciones Fáciles</h3>
+                <p>30 días de garantía sin preguntas</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                <h3>Soporte 24/7</h3>
+                <p>Atención al cliente siempre disponible</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Sobre Nosotros</h4>
+                <p>Clavijo Corporation es tu tienda de confianza para productos tecnológicos de calidad premium.</p>
+                <div class="social-links">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Productos</h4>
+                <ul>
+                    <li><a href="#">Laptops</a></li>
+                    <li><a href="#">Smartphones</a></li>
+                    <li><a href="#">Tablets</a></li>
+                    <li><a href="#">Accesorios</a></li>
+                    <li><a href="#">Gaming</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Información</h4>
+                <ul>
+                    <li><a href="#">Sobre Nosotros</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Términos de Servicio</a></li>
+                    <li><a href="#">Preguntas Frecuentes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +51 1 234 567</li>
+                    <li><i class="fas fa-envelope"></i> info@clavijo.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> San Isidro, Lima, Perú</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Clavijo Corporation. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // LÓGICA DE CARRITO
+        let carrito = [];
+
+        function addToCart(productName) {
+            carrito.push(productName);
+            alert(`${productName} agregado al carrito! Total: ${carrito.length} producto(s)`);
+            updateCartIcon();
+        }
+
+        function updateCartIcon() {
+            const cartIcon = document.querySelector('.cart-icon');
+            cartIcon.innerHTML = `<i class="fas fa-shopping-cart"></i> <span>${carrito.length}</span>`;
+        }
+
+        // EVENTOS DE NAVEGACIÓN SUAVE
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // EFECTO AL HACER HOVER EN TARJETAS
+        const cards = document.querySelectorAll('.product-card, .category-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.3s ease';
+            });
+        });
+
+        // ANIMACIÓN AL CARGAR LA PÁGINA
+        window.addEventListener('load', function() {
+            const features = document.querySelectorAll('.feature');
+            features.forEach((feature, index) => {
+                feature.style.animation = `slideInUp 0.6s ease forwards`;
+                feature.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+
+        // CARRITO AL HACER CLICK
+        document.querySelector('.cart-icon').addEventListener('click', function() {
+            if (carrito.length === 0) {
+                alert('Tu carrito está vacío');
+            } else {
+                alert(`Carrito: ${carrito.join(', ')}\nTotal de productos: ${carrito.length}`);
+            }
+        });
+    </script>
+</body>
+</html>
